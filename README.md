@@ -36,3 +36,12 @@ Added the ability to send data among different activities in the application usi
 - Add Task Page: ![Add Task](screenshots/AddTasksPage.jpg)
 - ![Add Task](screenshots/AddTasksPage2.jpg) to show counter
 - All Tasks Page: ![All Tasks](screenshots/AllTasksPage.jpg)
+
+## Day Three - Lab 28
+
+Added Fragment and layout and connect it to the main by recycle view and make a configuration for adapter.
+So when user click on the task it will show the details.screenshots
+
+- MainPage: ![HomePage][screenshots/HomePage2.jpg]
+- Android task: ![Android][screenshots/taskDetail2.jpg]
+- Task2: ![Amazon][screenshots/taskDetail.jpg]
