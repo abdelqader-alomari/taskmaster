@@ -18,12 +18,13 @@ public class TaskDetailPage extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String title = getIntent().getStringExtra("title");
+        String body = getIntent().getStringExtra("body");
         taskName.setText(sharedPreferences.getString("username","Enter your name")+"'s "+ title + " details" );
 
-        content.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tincidunt nunc pulvinar sapien et ligula ullamcorper.  ");
+        content.setText(body);
 
-        if(title == null){
-            taskName.setText(sharedPreferences.getString("username", "user") + "'s" + "details");
+        if(title == null || body == null){
+            taskName.setText(sharedPreferences.getString("username", "user") + "'s" + "Task " + "details");
             content.setText("There is no details");
         }
     }

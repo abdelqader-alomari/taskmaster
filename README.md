@@ -36,3 +36,27 @@ Added the ability to send data among different activities in the application usi
 - Add Task Page: ![Add Task](screenshots/AddTasksPage.jpg)
 - ![Add Task](screenshots/AddTasksPage2.jpg) to show counter
 - All Tasks Page: ![All Tasks](screenshots/AllTasksPage.jpg)
+
+## Day Three - Lab 28
+
+Added Fragment and layout and connect it to the main by recycle view and make a configuration for adapter.
+So when user click on the task it will show the details.screenshots
+
+- MainPage: ![HomePage](screenshots/homepage2.jpg)
+- Android task: ![Android](screenshots/taskdetail2.jpg)
+- Task2: ![Amazon](screenshots/taskdetail.jpg)
+
+## Day Four - Lab 29
+
+- Set up Room application, and modify Task class to be an Entity.
+- Modify Add Task form to save the data entered in as a Task in database.
+- Refactor homepage’s RecyclerView to display all Task entities in database.
+
+- MainPage after add 1 task:
+  ![HomePage](screenshots/HomePage3.jpg)
+- Add Task Page:
+  ![AddPage](screenshots/addTaskPage.jpg)
+  Added Task:
+  ![AddedTask](screenshots/addTask.jpg)
+- Main Page with 2 tasks added:
+  ![HomePage](screenshots/HomePage4.jpg)
