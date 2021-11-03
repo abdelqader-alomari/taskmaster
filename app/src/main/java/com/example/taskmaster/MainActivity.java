@@ -3,6 +3,7 @@ package com.example.taskmaster;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Database;
 
 
 import android.content.Intent;
@@ -18,12 +19,15 @@ import java.util.prefs.Preferences;
 
 public class MainActivity extends AppCompatActivity {
 
+    ArrayList<Task> tasks = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         Button addTask = findViewById(R.id.button3);
+        tasks = (ArrayList<Task>) AppDatabase.getInstance(getApplicationContext()).taskDao().getAll();
+
         addTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,13 +81,11 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-
-
-        ArrayList<Task> tasksData = new ArrayList<Task>();
-            tasksData.add(new Task("Java","Learn Java","complete"));
-            tasksData.add(new Task("Android","Learn Android","in progress"));
-            tasksData.add(new Task("LinkedList","Review and Practice LinkedList","assigned"));
-            tasksData.add(new Task("AWS","Explore Amazon and deploy android","new"));
+//        ArrayList<Task> tasksData = new ArrayList<Task>();
+//            tasksData.add(new Task("Java","Learn Java","complete"));
+////            tasksData.add(new Task("Android","Learn Android","in progress"));
+////            tasksData.add(new Task("LinkedList","Review and Practice LinkedList","assigned"));
+////            tasksData.add(new Task("AWS","Explore Amazon and deploy android","new"));
 
         RecyclerView allTasksRecyclerView = findViewById(R.id.RecyclerView);
 
@@ -91,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         allTasksRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // set the adapter for this recycler view
-        allTasksRecyclerView.setAdapter(new TaskAdapter(tasksData));
+        allTasksRecyclerView.setAdapter(new TaskAdapter(tasks));
 
 
     }
