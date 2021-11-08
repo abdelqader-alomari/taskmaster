@@ -5,7 +5,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class Task {
+public class Tasks {
 
     @PrimaryKey(autoGenerate = true)
     public Long id;
@@ -17,7 +17,7 @@ public class Task {
     @ColumnInfo(name = "task_state")
     public String state;
 
-    public Task(String title, String body, String state) {
+    public Tasks(String title, String body, String state) {
         this.title = title;
         this.body = body;
         this.state = state;

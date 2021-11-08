@@ -9,12 +9,12 @@ import java.util.List;
 @Dao
 public interface TaskDao {
 
-    @Query("Select * FROM task")
-    List<Task> getAll();
+    @Query("Select * FROM Tasks")
+    List<Tasks> getAll();
 
-    @Query("Select * FROM task WHERE id = :id")
-    Task getTaskById(long id);
+    @Query("Select * FROM Tasks WHERE id = :id")
+    Tasks getTaskById(long id);
 
     @Insert
-    Long insertTask(Task task);
+    Long insertTask(Tasks task);
 }

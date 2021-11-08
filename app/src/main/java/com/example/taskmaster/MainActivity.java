@@ -1,32 +1,57 @@
 package com.example.taskmaster;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Database;
 
 
+import android.bluetooth.BluetoothManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.amplifyframework.AmplifyException;
+import com.amplifyframework.api.aws.AWSApiPlugin;
+import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.AWSDataStorePlugin;
+import com.amplifyframework.datastore.generated.model.Task;
 
 import java.util.ArrayList;
 import java.util.prefs.Preferences;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<Task> tasks = new ArrayList<>();
+    private static final String TAG = "Main Activity";
+    ArrayList<Tasks> tasks = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        try {
+            Amplify.addPlugin(new AWSDataStorePlugin()); // stores records locally
+            Amplify.addPlugin(new AWSApiPlugin()); // stores things in DynamoDB and allows us to perform GraphQL queries
+            Amplify.configure(getApplicationContext());
+
+            Log.i(TAG, "Initialized Amplify");
+        } catch (AmplifyException error) {
+            Log.e(TAG, "Could not initialize Amplify", error);
+        }
+
+
         Button addTask = findViewById(R.id.button3);
-        tasks = (ArrayList<Task>) AppDatabase.getInstance(getApplicationContext()).taskDao().getAll();
+        tasks = (ArrayList<Tasks>) AppDatabase.getInstance(getApplicationContext()).taskDao().getAll();
 
         addTask.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +120,25 @@ public class MainActivity extends AppCompatActivity {
         // set the adapter for this recycler view
         allTasksRecyclerView.setAdapter(new TaskAdapter(tasks));
 
+        Handler handler = new Handler(Looper.myLooper(), new Handler.Callback() {
+            @Override
+            public boolean handleMessage(@NonNull Message msg) {
+                allTasksRecyclerView.getAdapter().notifyDataSetChanged();
+                return false;
+            }
+        });
+        Amplify.API.query(
+                ModelQuery.list(Task.class),
+                response -> {
+                    for (Task todo : response.getData()) {
+                        Tasks taskOrg = new Tasks(todo.getTitle(),todo.getBody(),todo.getState());
+                        tasks.add(taskOrg);
+                    }
+                    handler.sendEmptyMessage(1);
+                },
+                error -> Log.e("MyAmplifyApp", "Query failure", error)
+        );
 
     }
+
 }

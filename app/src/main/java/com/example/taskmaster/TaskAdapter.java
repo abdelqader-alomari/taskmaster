@@ -16,26 +16,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder> {
-    List<Task> allTasksData = new ArrayList<Task>();
+    ArrayList<Tasks> allTasksData = new ArrayList<Tasks>();
 
-    public TaskAdapter(ArrayList<Task> allTasksData) {
+    public TaskAdapter(ArrayList<Tasks> allTasksData) {
         this.allTasksData = allTasksData;
     }
 
     public static class TaskViewHolder extends RecyclerView.ViewHolder{
-        public Task task;
+        public Tasks task;
         public TextView taskTitle;
         public TextView taskBody;
         public TextView taskState;
         public ConstraintLayout constraintLayout;
 
         public TaskViewHolder(View taskView) {
-        super(taskView);
-        taskTitle = taskView.findViewById(R.id.tTitle);
-        taskBody = taskView.findViewById(R.id.tBody);
-        taskState = taskView.findViewById(R.id.tState);
-        constraintLayout= taskView.findViewById(R.id.ConstraintLayout);
-    }
+            super(taskView);
+            taskTitle = taskView.findViewById(R.id.tTitle);
+            taskBody = taskView.findViewById(R.id.tBody);
+            taskState = taskView.findViewById(R.id.tState);
+            constraintLayout= taskView.findViewById(R.id.ConstraintLayout);
+        }
     }
 
     @NonNull

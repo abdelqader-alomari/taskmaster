@@ -1,6 +1,6 @@
 # Task Master
 
-## Log v1.4 7/11/2021
+## Log v1.5 8/11/2021
 
 Task master is an android app with is help people to manage their daily tasks
 
@@ -68,3 +68,25 @@ one can be write manually (coded) which is powerful and I did in this lab
 and the other is visual as espresso recorded which record each action that do in app and can add asserts after that and make configurations and write codes automatically which is easier and quick, but not as powerful as regular espresso test.
 
 In this lab I tested most features of app using Espresso test and wrote comment in each single line to make it very clear. Most Tests depend on buttons and texts and what appeared on screen.
+
+## Day Six - Lab 32
+
+In this lab it must pre Created AWS Account and installed Amplify CLI to set up the application with Amplify
+
+- Using the `amplify add api` command, create a Task resource that replicates our existing Task schema.
+- Update all references to the Task data to instead use AWS Amplify to access your data in DynamoDB instead of in Room.
+- Modify Add Task form to save the data entered in as a Task to DynamoDB.
+- Refactor homepage’s RecyclerView to display all Task entities in DynamoDB.
+
+- Same images for previous lab:
+
+- MainPage after add 1 task:
+  ![HomePage](screenshots/HomePage3.jpg)
+- Add Task Page:
+  ![AddPage](screenshots/addTaskPage.jpg)
+  Added Task:
+  ![AddedTask](screenshots/addTask.jpg)
+- Main Page with 2 tasks added:
+  ![HomePage](screenshots/HomePage4.jpg)
+
+
