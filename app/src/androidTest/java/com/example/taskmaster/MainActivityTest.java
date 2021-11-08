@@ -36,98 +36,30 @@ public class MainActivityTest {
 
     @Test
     public void MainActivity(){
-        onView(withId(R.id.button2)).check(matches(withText("ALL TASKS")));
-    }
-    @Test
-    public void settingsActivety(){
-        onView(withId(R.id.settings)).perform(click());
-        onView((withId(R.id.textView6))).check(matches(withText("Settings")));
-    }
+        onView(withId(R.id.button2)).check(matches(withText("ALL TASKS"))); // check if "All TASKS" appear on main screen
+        onView(withId(R.id.button3)).check(matches(withText("ADD TASK")));  // check if "ADD TASK" appear on main screen
+        onView(withId(R.id.settings)).perform(click()); // Click on settings button
+        onView(withText("Settings")).check(matches(isDisplayed())); // Check if "Settings" appear in settings activity
+        onView(withId(R.id.username)).perform(typeText("Abdelqader")); // Type "Abdelqader" as username input in settings activity
+        onView(withId(R.id.submit)).perform(click()); // click on save button to save username
+        onView(withText("Abdelqader's Tasks")).check(matches(isDisplayed())); // check if username + "'s" + "Tasks" Appear on main activity after save username
+        onView(withId(R.id.button3)).perform(click()); // click on add Task button from main activity
+        onView(withId(R.id.taskTitleInput)).perform(typeText("Amazon"),closeSoftKeyboard()); // type title in add task activity and close keyboard
+        onView(withId(R.id.taskDescriptionInput)).perform(typeText("Learn Amplify and DynamoDB"),closeSoftKeyboard()); // type description in add task activity and close keyboard
+        onView(withId(R.id.taskStateInput)).perform(typeText("New"),closeSoftKeyboard()); // // type state in add task activity and close keyboard
 
-    @Test
-    public void addTask(){
-        onView(withId(R.id.button3)).perform(click());
-        onView(withId(R.id.button4)).check(matches(withText("ADD TASK")));
-    }
-    @Test
-    public void allTasks(){
-        onView(withId(R.id.button2)).perform(click());
-        onView(withId(R.id.textView4)).check(matches(withText("All Tasks")));
-    }
-    @Test
-    public void addNewTask(){
-        onView(withId(R.id.button3)).perform(click());
-        onView(withId(R.id.taskTitleInput)).perform(typeText("Amazon"),closeSoftKeyboard());
-        onView(withId(R.id.taskDescriptionInput)).perform(typeText("Learn Amplify and DynamicDB"),closeSoftKeyboard());
-        onView(withId(R.id.taskStateInput)).perform(typeText("New"),closeSoftKeyboard());
+        onView(withId(R.id.button4)).perform(click()); // click add Task button in add task activity to save typed information
+        onView(withText("Amazon")).check(matches(isDisplayed())); // check of the title typed in add Task matches appeared title in main activity
+        onView(withText("Learn Amplify and DynamoDB")).check(matches(isDisplayed())); // check of the description typed in add Task matches appeared description in main activity
+        onView(withText("New")).check(matches(isDisplayed())); // // check of the status typed in add Task matches appeared status in main activity
 
-        onView(withId(R.id.button4)).perform(click());
-    }
-    @Test
-    public void openTaskDetail() throws InterruptedException {
-        onView(ViewMatchers.withId(R.id.RecyclerView)).check(matches(isDisplayed()));
-        Thread.sleep(5000);
-
-        onView(withId(R.id.RecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(0,click()));
-
-        onView(withId(R.id.textView5)).check(matches(withText("Learn Amplify and DynamicDB")));
-    }
-
-    @Test
-    public void settingsTest() {
-        ViewInteraction appCompatImageButton = onView(
-                allOf(withId(R.id.settings),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                7),
-                        isDisplayed()));
-        appCompatImageButton.perform(click());
-
-        ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.username),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                0),
-                        isDisplayed()));
-        appCompatEditText.perform(replaceText("Abdelqader"), closeSoftKeyboard());
-
-        ViewInteraction materialButton = onView(
-                allOf(withId(R.id.submit), withText("Save"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                1),
-                        isDisplayed()));
-        materialButton.perform(click());
-
-        ViewInteraction textView = onView(
-                allOf(withId(R.id.user), withText("Abdelqader's Tasks"),
-                        withParent(withParent(withId(android.R.id.content))),
-                        isDisplayed()));
-        textView.check(matches(withText("Abdelqader's Tasks")));
-    }
-
-    private static Matcher<View> childAtPosition(
-            final Matcher<View> parentMatcher, final int position) {
-
-        return new TypeSafeMatcher<View>() {
-            @Override
-            public void describeTo(Description description) {
-                description.appendText("Child at position " + position + " in parent ");
-                parentMatcher.describeTo(description);
-            }
-
-            @Override
-            public boolean matchesSafely(View view) {
-                ViewParent parent = view.getParent();
-                return parent instanceof ViewGroup && parentMatcher.matches(parent)
-                        && view.equals(((ViewGroup) parent).getChildAt(position));
-            }
-        };
+        onView(ViewMatchers.withId(R.id.RecyclerView)).check(matches(isDisplayed())); // check the matchers of recycle view on main activity and delay an action for 2 seconds.
+        try {
+            Thread.sleep(2000); // delay for 2 sec
+        } catch (InterruptedException e) {
+            e.printStackTrace(); // handle exception
+        }
+        onView(withId(R.id.RecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(0,click())); // click and show recycle view item (display at TaskDetail activity)
+        onView(withId(R.id.textView5)).check(matches(withText("Learn Amplify and DynamoDB"))); // check if the description of task display on TaskDetail activity from recycle view.
     }
 }

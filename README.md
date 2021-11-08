@@ -1,6 +1,6 @@
 # Task Master
 
-## Log v1.0 31/10/2021
+## Log v1.4 7/11/2021
 
 Task master is an android app with is help people to manage their daily tasks
 
@@ -60,3 +60,11 @@ So when user click on the task it will show the details.screenshots
   ![AddedTask](screenshots/addTask.jpg)
 - Main Page with 2 tasks added:
   ![HomePage](screenshots/HomePage4.jpg)
+
+## Day Five - Lab 31
+
+In this lab the core thing is test the app using Espresso Tests which is really nice and easy test come up with 2 versions
+one can be write manually (coded) which is powerful and I did in this lab
+and the other is visual as espresso recorded which record each action that do in app and can add asserts after that and make configurations and write codes automatically which is easier and quick, but not as powerful as regular espresso test.
+
+In this lab I tested most features of app using Espresso test and wrote comment in each single line to make it very clear. Most Tests depend on buttons and texts and what appeared on screen.
