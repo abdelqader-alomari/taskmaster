@@ -1,6 +1,6 @@
 # Task Master
 
-## Log v1.0 31/10/2021
+## Log v1.6 10/11/2021
 
 Task master is an android app with is help people to manage their daily tasks
 
@@ -60,3 +60,31 @@ So when user click on the task it will show the details.screenshots
   ![AddedTask](screenshots/addTask.jpg)
 - Main Page with 2 tasks added:
   ![HomePage](screenshots/HomePage4.jpg)
+
+## Day Six - Lab 32
+
+In this lab it must pre Created AWS Account and installed Amplify CLI to set up the application with Amplify
+
+- Using the `amplify add api` command, create a Task resource that replicates our existing Task schema.
+- Update all references to the Task data to instead use AWS Amplify to access your data in DynamoDB instead of in Room.
+- Modify Add Task form to save the data entered in as a Task to DynamoDB.
+- Refactor homepage’s RecyclerView to display all Task entities in DynamoDB.
+
+- Same images for previous lab:
+
+- MainPage after add 1 task:
+  ![HomePage](screenshots/HomePage3.jpg)
+- Add Task Page:
+  ![AddPage](screenshots/addTaskPage.jpg)
+  Added Task:
+  ![AddedTask](screenshots/addTask.jpg)
+- Main Page with 2 tasks added:
+  ![HomePage](screenshots/HomePage4.jpg)
+
+## Day Eight - Lab 34
+
+- In this lab I create a first apk file from this application throw android studio
+
+apk file is the file used to publish on google play and consumed from android users
+
+**The file Located @** app/build/outputs/apk/debug
