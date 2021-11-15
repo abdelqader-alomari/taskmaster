@@ -1,86 +1,91 @@
 package com.example.taskmaster;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.amplifyframework.AmplifyException;
+import com.amplifyframework.api.aws.AWSApiPlugin;
+import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.core.Amplify;
-import com.amplifyframework.datastore.generated.model.Todo;
+import com.amplifyframework.datastore.AWSDataStorePlugin;
+import com.amplifyframework.datastore.generated.model.Task;
+import com.amplifyframework.datastore.generated.model.Team;
 
 public class AddTask extends AppCompatActivity {
+
     private static final String TAG = "AddTask";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
+        Button addTaskButton = AddTask.this.findViewById(R.id.button4);
+        addTaskButton.setOnClickListener(view -> {
+            EditText studentTitle = findViewById(R.id.taskTitleInput);
+            String TitleName = studentTitle.getText().toString();
+            EditText Body = findViewById(R.id.taskDescriptionInput);
+            String BodyB = (Body.getText().toString());
+            EditText State = findViewById(R.id.taskStateInput);
+            String StateB = (State.getText().toString());
+            RadioButton b1 = findViewById(R.id.radioButton1);
+            RadioButton b2 = findViewById(R.id.radioButton2);
+            RadioButton b3 = findViewById(R.id.radioButton3);
 
-        Button addTask = findViewById(R.id.button4);
-        addTask.setOnClickListener(new View.OnClickListener() {
 
-            public int tasksCounter;
-
-            private void dataStore(String title,String body,String status){
-                Todo task = Todo.builder()
-                        .title(title)
-                        .body(body)
-                        .state(status)
-                        .build();
-
-                // save with the datastore
-                Amplify.DataStore.save(task, result -> {
-                    Log.i(TAG, "Task Saved");
-                }, error -> {
-                    Log.i(TAG, "Task Not Saved");
-                });
-
-                // query with the datastore
-                Amplify.DataStore.query(
-                        Todo.class,
-                        queryMatches -> {
-                            while (queryMatches.hasNext()) {
-                                Log.i(TAG, "Successful query, found tasks.");
-                                Todo taskMaster = queryMatches.next();
-                                Log.i(TAG, taskMaster.getTitle());
-//                        label.setText(taskMaster.getTitle());
-                            }
-                        },
-                        error -> {
-                            Log.i(TAG,  "Error retrieving tasks", error);
-                        });
+            String id = null;
+            if (b1.isChecked()) {
+                id = "1";
+            } else if (b2.isChecked()) {
+                id = "2";
+            } else if (b3.isChecked()) {
+                id = "3";
             }
 
-            @Override
-            public void onClick(View view) {
-                EditText taskTitleField = findViewById(R.id.taskTitleInput);
-                String taskTitle = taskTitleField.getText().toString();
+            dataStore(TitleName, BodyB, StateB, id);
 
-                EditText taskBodyField = findViewById(R.id.taskDescriptionInput);
-                String taskBody = taskBodyField.getText().toString();
+            System.out.println(
+                    "++++++++++++++++++++++++++++++++++++++++++++++++++" +
+                            " Title Name: " + TitleName
+                            +
+                            "++++++++++++++++++++++++++++++++++++++++++++++++++"
+            );
 
-                EditText taskStateField = findViewById(R.id.taskStateInput);
-                String taskState = taskStateField.getText().toString();
 
-                dataStore(taskTitle, taskBody, taskState);
-
-//                System.out.println(
-//                        "***********************************************" + "Task ID : " + addedTaskId + "*********************************************"
-//                );
-
-                Intent intent = new Intent(AddTask.this, MainActivity.class);
-                TextView tasks = findViewById(R.id.textView12);
-                tasksCounter++;
-                tasks.setText(String.valueOf(tasksCounter));
-                Toast.makeText(AddTask.this,"Task successfully added",Toast.LENGTH_SHORT).show();
-                startActivity(intent);
-            }
+            Intent intent = new Intent(AddTask.this, MainActivity.class);
+            startActivity(intent);
         });
+
     }
+
+    private void dataStore(String title, String body, String state, String id) {
+        Task task = Task.builder().teamId(id).title(title).body(body).state(state).build();
+
+
+        Amplify.API.mutate(ModelMutation.create(task), succuess -> {
+            Log.i(TAG, "Saved to DYNAMODB");
+        }, error -> {
+            Log.i(TAG, "error saving to DYNAMODB");
+        });
+
+    }
+
+//    private void dataStore2(String name, String id) {
+//        Team team = Team.builder().name(name).id(id).build();
+//
+//        // save with the datastore
+//        Amplify.API.mutate(ModelMutation.create(team), succuess -> {
+//            Log.i(TAG, "Team Saved to DYNAMODB");
+//        }, error -> {
+//            Log.i(TAG, "error saving Team to DYNAMODB");
+//        });
+//
+//    }
 }
