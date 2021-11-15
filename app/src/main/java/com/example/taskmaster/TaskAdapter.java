@@ -22,8 +22,6 @@ import com.amplifyframework.datastore.generated.model.Task;
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
     List<Task> allTasksData = new ArrayList<>();
-
-
     public TaskAdapter(List<Task> allTasksData) {
         this.allTasksData = allTasksData;
     }
