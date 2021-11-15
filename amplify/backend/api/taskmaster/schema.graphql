@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 type Team @model {
   id: ID!
   name: String!
@@ -11,3 +12,11 @@ type Task @model @key(name: "byTeam", fields: ["teamID", "title"]) {
   body : String
   state : String
 }
+=======
+type Todo @model {
+  id: ID!
+  title: String!
+  body: String!
+  state: String
+}
+>>>>>>> 4bf0976648cf9cbde628a9527c5b6009d3959f06

@@ -21,231 +21,231 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 @ModelConfig(pluralName = "Tasks")
 @Index(name = "byTeam", fields = {"teamID","title"})
 public final class Task implements Model {
-  public static final QueryField ID = field("Task", "id");
-  public static final QueryField TEAM_ID = field("Task", "teamID");
-  public static final QueryField TITLE = field("Task", "title");
-  public static final QueryField BODY = field("Task", "body");
-  public static final QueryField STATE = field("Task", "state");
-  private final @ModelField(targetType="ID", isRequired = true) String id;
-  private final @ModelField(targetType="ID", isRequired = true) String teamID;
-  private final @ModelField(targetType="String", isRequired = true) String title;
-  private final @ModelField(targetType="String") String body;
-  private final @ModelField(targetType="String") String state;
-  private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
-  private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
-  public String getId() {
-      return id;
-  }
-  
-  public String getTeamId() {
-      return teamID;
-  }
-  
-  public String getTitle() {
-      return title;
-  }
-  
-  public String getBody() {
-      return body;
-  }
-  
-  public String getState() {
-      return state;
-  }
-  
-  public Temporal.DateTime getCreatedAt() {
-      return createdAt;
-  }
-  
-  public Temporal.DateTime getUpdatedAt() {
-      return updatedAt;
-  }
-  
-  private Task(String id, String teamID, String title, String body, String state) {
-    this.id = id;
-    this.teamID = teamID;
-    this.title = title;
-    this.body = body;
-    this.state = state;
-  }
-  
-  @Override
-   public boolean equals(Object obj) {
-      if (this == obj) {
-        return true;
-      } else if(obj == null || getClass() != obj.getClass()) {
-        return false;
-      } else {
-      Task task = (Task) obj;
-      return ObjectsCompat.equals(getId(), task.getId()) &&
-              ObjectsCompat.equals(getTeamId(), task.getTeamId()) &&
-              ObjectsCompat.equals(getTitle(), task.getTitle()) &&
-              ObjectsCompat.equals(getBody(), task.getBody()) &&
-              ObjectsCompat.equals(getState(), task.getState()) &&
-              ObjectsCompat.equals(getCreatedAt(), task.getCreatedAt()) &&
-              ObjectsCompat.equals(getUpdatedAt(), task.getUpdatedAt());
-      }
-  }
-  
-  @Override
-   public int hashCode() {
-    return new StringBuilder()
-      .append(getId())
-      .append(getTeamId())
-      .append(getTitle())
-      .append(getBody())
-      .append(getState())
-      .append(getCreatedAt())
-      .append(getUpdatedAt())
-      .toString()
-      .hashCode();
-  }
-  
-  @Override
-   public String toString() {
-    return new StringBuilder()
-      .append("Task {")
-      .append("id=" + String.valueOf(getId()) + ", ")
-      .append("teamID=" + String.valueOf(getTeamId()) + ", ")
-      .append("title=" + String.valueOf(getTitle()) + ", ")
-      .append("body=" + String.valueOf(getBody()) + ", ")
-      .append("state=" + String.valueOf(getState()) + ", ")
-      .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
-      .append("updatedAt=" + String.valueOf(getUpdatedAt()))
-      .append("}")
-      .toString();
-  }
-  
-  public static TeamIdStep builder() {
-      return new Builder();
-  }
-  
-  /** 
-   * WARNING: This method should not be used to build an instance of this object for a CREATE mutation.
-   * This is a convenience method to return an instance of the object with only its ID populated
-   * to be used in the context of a parameter in a delete mutation or referencing a foreign key
-   * in a relationship.
-   * @param id the id of the existing item this instance will represent
-   * @return an instance of this model with only ID populated
-   */
-  public static Task justId(String id) {
-    return new Task(
-      id,
-      null,
-      null,
-      null,
-      null
-    );
-  }
-  
-  public CopyOfBuilder copyOfBuilder() {
-    return new CopyOfBuilder(id,
-      teamID,
-      title,
-      body,
-      state);
-  }
-  public interface TeamIdStep {
-    TitleStep teamId(String teamId);
-  }
-  
+    public static final QueryField ID = field("Task", "id");
+    public static final QueryField TEAM_ID = field("Task", "teamID");
+    public static final QueryField TITLE = field("Task", "title");
+    public static final QueryField BODY = field("Task", "body");
+    public static final QueryField STATE = field("Task", "state");
+    private final @ModelField(targetType="ID", isRequired = true) String id;
+    private final @ModelField(targetType="ID", isRequired = true) String teamID;
+    private final @ModelField(targetType="String", isRequired = true) String title;
+    private final @ModelField(targetType="String") String body;
+    private final @ModelField(targetType="String") String state;
+    private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
+    private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
+    public String getId() {
+        return id;
+    }
 
-  public interface TitleStep {
-    BuildStep title(String title);
-  }
-  
+    public String getTeamId() {
+        return teamID;
+    }
 
-  public interface BuildStep {
-    Task build();
-    BuildStep id(String id);
-    BuildStep body(String body);
-    BuildStep state(String state);
-  }
-  
+    public String getTitle() {
+        return title;
+    }
 
-  public static class Builder implements TeamIdStep, TitleStep, BuildStep {
-    private String id;
-    private String teamID;
-    private String title;
-    private String body;
-    private String state;
-    @Override
-     public Task build() {
-        String id = this.id != null ? this.id : UUID.randomUUID().toString();
-        
-        return new Task(
-          id,
-          teamID,
-          title,
-          body,
-          state);
+    public String getBody() {
+        return body;
     }
-    
-    @Override
-     public TitleStep teamId(String teamId) {
-        Objects.requireNonNull(teamId);
-        this.teamID = teamId;
-        return this;
+
+    public String getState() {
+        return state;
     }
-    
-    @Override
-     public BuildStep title(String title) {
-        Objects.requireNonNull(title);
-        this.title = title;
-        return this;
+
+    public Temporal.DateTime getCreatedAt() {
+        return createdAt;
     }
-    
-    @Override
-     public BuildStep body(String body) {
-        this.body = body;
-        return this;
+
+    public Temporal.DateTime getUpdatedAt() {
+        return updatedAt;
     }
-    
-    @Override
-     public BuildStep state(String state) {
-        this.state = state;
-        return this;
-    }
-    
-    /** 
-     * @param id id
-     * @return Current Builder instance, for fluent method chaining
-     */
-    public BuildStep id(String id) {
+
+    private Task(String id, String teamID, String title, String body, String state) {
         this.id = id;
-        return this;
+        this.teamID = teamID;
+        this.title = title;
+        this.body = body;
+        this.state = state;
     }
-  }
-  
 
-  public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String teamId, String title, String body, String state) {
-      super.id(id);
-      super.teamId(teamId)
-        .title(title)
-        .body(body)
-        .state(state);
-    }
-    
     @Override
-     public CopyOfBuilder teamId(String teamId) {
-      return (CopyOfBuilder) super.teamId(teamId);
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if(obj == null || getClass() != obj.getClass()) {
+            return false;
+        } else {
+            Task task = (Task) obj;
+            return ObjectsCompat.equals(getId(), task.getId()) &&
+                    ObjectsCompat.equals(getTeamId(), task.getTeamId()) &&
+                    ObjectsCompat.equals(getTitle(), task.getTitle()) &&
+                    ObjectsCompat.equals(getBody(), task.getBody()) &&
+                    ObjectsCompat.equals(getState(), task.getState()) &&
+                    ObjectsCompat.equals(getCreatedAt(), task.getCreatedAt()) &&
+                    ObjectsCompat.equals(getUpdatedAt(), task.getUpdatedAt());
+        }
     }
-    
+
     @Override
-     public CopyOfBuilder title(String title) {
-      return (CopyOfBuilder) super.title(title);
+    public int hashCode() {
+        return new StringBuilder()
+                .append(getId())
+                .append(getTeamId())
+                .append(getTitle())
+                .append(getBody())
+                .append(getState())
+                .append(getCreatedAt())
+                .append(getUpdatedAt())
+                .toString()
+                .hashCode();
     }
-    
+
     @Override
-     public CopyOfBuilder body(String body) {
-      return (CopyOfBuilder) super.body(body);
+    public String toString() {
+        return new StringBuilder()
+                .append("Task {")
+                .append("id=" + String.valueOf(getId()) + ", ")
+                .append("teamID=" + String.valueOf(getTeamId()) + ", ")
+                .append("title=" + String.valueOf(getTitle()) + ", ")
+                .append("body=" + String.valueOf(getBody()) + ", ")
+                .append("state=" + String.valueOf(getState()) + ", ")
+                .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
+                .append("updatedAt=" + String.valueOf(getUpdatedAt()))
+                .append("}")
+                .toString();
     }
-    
-    @Override
-     public CopyOfBuilder state(String state) {
-      return (CopyOfBuilder) super.state(state);
+
+    public static TeamIdStep builder() {
+        return new Builder();
     }
-  }
-  
+
+    /**
+     * WARNING: This method should not be used to build an instance of this object for a CREATE mutation.
+     * This is a convenience method to return an instance of the object with only its ID populated
+     * to be used in the context of a parameter in a delete mutation or referencing a foreign key
+     * in a relationship.
+     * @param id the id of the existing item this instance will represent
+     * @return an instance of this model with only ID populated
+     */
+    public static Task justId(String id) {
+        return new Task(
+                id,
+                null,
+                null,
+                null,
+                null
+        );
+    }
+
+    public CopyOfBuilder copyOfBuilder() {
+        return new CopyOfBuilder(id,
+                teamID,
+                title,
+                body,
+                state);
+    }
+    public interface TeamIdStep {
+        TitleStep teamId(String teamId);
+    }
+
+
+    public interface TitleStep {
+        BuildStep title(String title);
+    }
+
+
+    public interface BuildStep {
+        Task build();
+        BuildStep id(String id);
+        BuildStep body(String body);
+        BuildStep state(String state);
+    }
+
+
+    public static class Builder implements TeamIdStep, TitleStep, BuildStep {
+        private String id;
+        private String teamID;
+        private String title;
+        private String body;
+        private String state;
+        @Override
+        public Task build() {
+            String id = this.id != null ? this.id : UUID.randomUUID().toString();
+
+            return new Task(
+                    id,
+                    teamID,
+                    title,
+                    body,
+                    state);
+        }
+
+        @Override
+        public TitleStep teamId(String teamId) {
+            Objects.requireNonNull(teamId);
+            this.teamID = teamId;
+            return this;
+        }
+
+        @Override
+        public BuildStep title(String title) {
+            Objects.requireNonNull(title);
+            this.title = title;
+            return this;
+        }
+
+        @Override
+        public BuildStep body(String body) {
+            this.body = body;
+            return this;
+        }
+
+        @Override
+        public BuildStep state(String state) {
+            this.state = state;
+            return this;
+        }
+
+        /**
+         * @param id id
+         * @return Current Builder instance, for fluent method chaining
+         */
+        public BuildStep id(String id) {
+            this.id = id;
+            return this;
+        }
+    }
+
+
+    public final class CopyOfBuilder extends Builder {
+        private CopyOfBuilder(String id, String teamId, String title, String body, String state) {
+            super.id(id);
+            super.teamId(teamId)
+                    .title(title)
+                    .body(body)
+                    .state(state);
+        }
+
+        @Override
+        public CopyOfBuilder teamId(String teamId) {
+            return (CopyOfBuilder) super.teamId(teamId);
+        }
+
+        @Override
+        public CopyOfBuilder title(String title) {
+            return (CopyOfBuilder) super.title(title);
+        }
+
+        @Override
+        public CopyOfBuilder body(String body) {
+            return (CopyOfBuilder) super.body(body);
+        }
+
+        @Override
+        public CopyOfBuilder state(String state) {
+            return (CopyOfBuilder) super.state(state);
+        }
+    }
+
 }
