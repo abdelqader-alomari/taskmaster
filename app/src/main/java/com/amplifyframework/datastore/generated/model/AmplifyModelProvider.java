@@ -7,47 +7,47 @@ import com.amplifyframework.core.model.ModelProvider;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-/**
+/** 
  *  Contains the set of model classes that implement {@link Model}
  * interface.
  */
 
 public final class AmplifyModelProvider implements ModelProvider {
-    private static final String AMPLIFY_MODEL_VERSION = "fd03d7774e515488c178aeb969b75d10";
-    private static AmplifyModelProvider amplifyGeneratedModelInstance;
-    private AmplifyModelProvider() {
-
+  private static final String AMPLIFY_MODEL_VERSION = "8a489c87d1addb5a7b2150820018d9ce";
+  private static AmplifyModelProvider amplifyGeneratedModelInstance;
+  private AmplifyModelProvider() {
+    
+  }
+  
+  public static AmplifyModelProvider getInstance() {
+    if (amplifyGeneratedModelInstance == null) {
+      amplifyGeneratedModelInstance = new AmplifyModelProvider();
     }
-
-    public static AmplifyModelProvider getInstance() {
-        if (amplifyGeneratedModelInstance == null) {
-            amplifyGeneratedModelInstance = new AmplifyModelProvider();
-        }
-        return amplifyGeneratedModelInstance;
-    }
-
-    /**
-     * Get a set of the model classes.
-     *
-     * @return a set of the model classes.
-     */
-    @Override
-    public Set<Class<? extends Model>> models() {
-        final Set<Class<? extends Model>> modifiableSet = new HashSet<>(
-                Arrays.<Class<? extends Model>>asList(Team.class, Task.class)
+    return amplifyGeneratedModelInstance;
+  }
+  
+  /** 
+   * Get a set of the model classes.
+   * 
+   * @return a set of the model classes.
+   */
+  @Override
+   public Set<Class<? extends Model>> models() {
+    final Set<Class<? extends Model>> modifiableSet = new HashSet<>(
+          Arrays.<Class<? extends Model>>asList(Team.class, Task.class)
         );
-
+    
         return Immutable.of(modifiableSet);
-
-    }
-
-    /**
-     * Get the version of the models.
-     *
-     * @return the version string of the models.
-     */
-    @Override
-    public String version() {
-        return AMPLIFY_MODEL_VERSION;
-    }
+        
+  }
+  
+  /** 
+   * Get the version of the models.
+   * 
+   * @return the version string of the models.
+   */
+  @Override
+   public String version() {
+    return AMPLIFY_MODEL_VERSION;
+  }
 }

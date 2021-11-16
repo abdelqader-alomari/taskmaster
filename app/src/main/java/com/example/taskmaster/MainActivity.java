@@ -9,11 +9,13 @@ import android.preference.PreferenceManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.api.graphql.model.ModelMutation;
@@ -46,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
         TextView showTeam = findViewById(R.id.showTeam);
         showTeam.setText("Team: " + teamName);
 
-        configureAmplify();
         createTeams();
 
         RecyclerView allTasksRecyclerView = findViewById(R.id.recyclerview);
@@ -66,6 +67,15 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, AddTask.class);
             startActivity(intent);
         });
+        ImageView logout = MainActivity.this.findViewById(R.id.signout);
+        logout.setOnClickListener((view -> {
+            Amplify.Auth.signOut(
+                    () -> Log.i("AuthQuickstart", "Signed out successfully"),
+                    error -> Log.e("AuthQuickstart", error.toString())
+            );
+            Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+            startActivity(intent);
+        }));
 
         Button allTasks = MainActivity.this.findViewById(R.id.allTasks);
         allTasks.setOnClickListener(view -> {
@@ -77,6 +87,11 @@ public class MainActivity extends AppCompatActivity {
             Intent settings = new Intent(MainActivity.this, SettingsPage.class);
             startActivity(settings);
         });
+
+        Amplify.Auth.fetchAuthSession(
+                result -> Log.i("AmplifyQuickstart", result.toString()),
+                error -> Log.e("AmplifyQuickstart", error.toString())
+        );
     }
     @Override
     protected void onResume() {
@@ -89,15 +104,6 @@ public class MainActivity extends AppCompatActivity {
         welcome.setText( user+"’s Tasks");
     }
 
-    private void configureAmplify() {
-        try {
-            Amplify.addPlugin(new AWSDataStorePlugin());
-            Amplify.addPlugin(new AWSApiPlugin());
-            Amplify.configure(getApplicationContext());
-            Log.i(TAG, "Initialized Amplify");
-        } catch (AmplifyException error) {
-            Log.e(TAG, "Could not initialize Amplify", error);
-        }}
 
     private  List<Task> getData( RecyclerView allTaskDataRecyclerView ){
         Handler handler = new Handler(Looper.myLooper(), new Handler.Callback() {
