@@ -1,6 +1,6 @@
 # Task Master
 
-## Log v1.6 14/11/2021
+## Log v1.7 15/11/2021
 
 Task master is an android app with is help people to manage their daily tasks
 
@@ -126,7 +126,11 @@ Allow users to log out of your application, it will redirect the user after that
 
 ### Screenshots
 
-Register Page: ![Signup](screenshots/screens/signupScreen2.PNG)
-Confirmation Activity: ![Confirmation Code](screenshots/screens/confirmation%20code.PNG)
-Login Page: ![Login](screenshots/screens/Login2.PNG)
-Main Page after Login: ![Main](screenshots/screens/AfterLogin.PNG)
+- Register Page:
+  ![Signup](screenshots/screens/signupScreen2.PNG)
+- Confirmation Activity:
+  ![Confirmation Code](screenshots/screens/confirmation%20code.PNG)
+- Login Page:
+  ![Login](screenshots/screens/Login2.PNG)
+- Main Page after Login:
+  ![Main](screenshots/screens/AfterLogin.PNG)
