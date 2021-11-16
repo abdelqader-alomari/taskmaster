@@ -161,16 +161,11 @@ Allow users to log out of your application, it will redirect the user after that
 
 ## Lab 37
 
-### User Login
-Add Cognito to your Amplify setup. Add in user login and sign up flows to your application, using Cognito’s pre-built UI as appropriate.
+## Uploads
+On the “Add a Task” activity, allow users to optionally select a file to attach to that task. If a user attaches a file to a task, that file should be uploaded to S3, and associated with that task.
 
-The process -> Register page shown first (because the app is new and the most will be register first) to register by username, email and password
-if entered valid values it will take the user to confirmation page to confirm the email by confirmation code sent to user's email,
-after entered correct confirmation code user will redirect to login page where can enter his her data and start using the app.
-if the user already registered he/she can click on the "already have an account ?" to take him/her to the login page
-
-### User Logout
-Allow users to log out of your application, it will redirect the user after that to login page.
+## Displaying Files
+On the Task detail activity, if there is a file that is an image associated with a particular Task, that image should be displayed within that activity. (If the file is any other type, you should display a link to it.)
 
 ### Screenshots
 
