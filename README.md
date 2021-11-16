@@ -1,6 +1,6 @@
 # Task Master
 
-## Log v1.7 15/11/2021
+## Log v1.8 16/11/2021
 
 Task master is an android app with is help people to manage their daily tasks
 
@@ -133,4 +133,51 @@ Allow users to log out of your application, it will redirect the user after that
 - Login Page:
   -  ![Login](screenshots/screens/Login2.PNG)
 - Main Page after Login:
+  - ![Main](screenshots/screens/AfterLogin.PNG)
+
+## Day Seven - Lab 36
+
+### User Login
+Add Cognito to your Amplify setup. Add in user login and sign up flows to your application, using Cognito’s pre-built UI as appropriate.
+
+The process -> Register page shown first (because the app is new and the most will be register first) to register by username, email and password
+if entered valid values it will take the user to confirmation page to confirm the email by confirmation code sent to user's email,
+after entered correct confirmation code user will redirect to login page where can enter his her data and start using the app.
+if the user already registered he/she can click on the "already have an account ?" to take him/her to the login page
+
+### User Logout
+Allow users to log out of your application, it will redirect the user after that to login page.
+
+### Screenshots
+
+- Register Page:
+  - ![Signup](screenshots/screens/signupScreen2.PNG)
+- Confirmation Activity:
+  -  ![Confirmation Code](screenshots/screens/confirmation%20code.PNG)
+- Login Page:
+  -  ![Login](screenshots/screens/Login2.PNG)
+- Main Page after Login:
+  - ![Main](screenshots/screens/AfterLogin.PNG)
+
+## Lab 37
+
+### User Login
+Add Cognito to your Amplify setup. Add in user login and sign up flows to your application, using Cognito’s pre-built UI as appropriate.
+
+The process -> Register page shown first (because the app is new and the most will be register first) to register by username, email and password
+if entered valid values it will take the user to confirmation page to confirm the email by confirmation code sent to user's email,
+after entered correct confirmation code user will redirect to login page where can enter his her data and start using the app.
+if the user already registered he/she can click on the "already have an account ?" to take him/her to the login page
+
+### User Logout
+Allow users to log out of your application, it will redirect the user after that to login page.
+
+### Screenshots
+
+- Upload File:
+  - ![upload](screenshots/screens/upload.PNG)
+- File Uploaded done AWS S3:
+  -  ![AWS S3 img](screenshots/screens/S3.PNG)
+     
+- Main Page
   - ![Main](screenshots/screens/AfterLogin.PNG)

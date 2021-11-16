@@ -56,6 +56,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
                 editor.putString("task_description",body);
                 String state =viewHolder.textViewState.getText().toString();
                 editor.putString("task_state",state);
+                String filePath = task.getImgUrl();
+                editor.putString("task_imgUrl",filePath);
 
                 editor.apply();
 
