@@ -127,10 +127,10 @@ Allow users to log out of your application, it will redirect the user after that
 ### Screenshots
 
 - Register Page:
-  ![Signup](screenshots/screens/signupScreen2.PNG)
+  - ![Signup](screenshots/screens/signupScreen2.PNG)
 - Confirmation Activity:
-  ![Confirmation Code](screenshots/screens/confirmation%20code.PNG)
+  -  ![Confirmation Code](screenshots/screens/confirmation%20code.PNG)
 - Login Page:
-  ![Login](screenshots/screens/Login2.PNG)
+  -  ![Login](screenshots/screens/Login2.PNG)
 - Main Page after Login:
-  ![Main](screenshots/screens/AfterLogin.PNG)
+  - ![Main](screenshots/screens/AfterLogin.PNG)
