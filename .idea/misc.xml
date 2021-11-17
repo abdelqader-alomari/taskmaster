@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/STUDENT/AndroidStudioProjects/taskmaster/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.15" />
+        <entry key="..\:/Users/STUDENT/AndroidStudioProjects/taskmaster/app/src/main/res/drawable/ic_arrow_left.xml" value="0.2203125" />
         <entry key="..\:/Users/STUDENT/AndroidStudioProjects/taskmaster/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1125" />
         <entry key="..\:/Users/STUDENT/AndroidStudioProjects/taskmaster/app/src/main/res/layout/activity_add_task.xml" value="0.5" />
         <entry key="..\:/Users/STUDENT/AndroidStudioProjects/taskmaster/app/src/main/res/layout/activity_all_tasks.xml" value="0.18" />
