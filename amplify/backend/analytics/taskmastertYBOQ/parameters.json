@@ -1,0 +1,22 @@
+{
+    "appName": "taskmastertYBOQ",
+    "roleName": "pinpointLambdaRole99434f65",
+    "cloudformationPolicyName": "cloudformationPolicy99434f65",
+    "cloudWatchPolicyName": "cloudWatchPolicy99434f65",
+    "pinpointPolicyName": "pinpointPolicy99434f65",
+    "authPolicyName": "pinpoint_amplify_99434f65",
+    "unauthPolicyName": "pinpoint_amplify_99434f65",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "authRoleArn": {
+        "Fn::GetAtt": [
+            "AuthRole",
+            "Arn"
+        ]
+    },
+    "appId": "317dddc179a248c2ad93cd8d9de142eb"
+}

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.amplifyframework.analytics.AnalyticsEvent;
 import com.amplifyframework.core.Amplify;
 
 public class LoginActivity extends AppCompatActivity {
@@ -20,6 +21,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        recordEvent();
 
         Button signIn = findViewById(R.id.login);
         EditText username = findViewById(R.id.loginUsername);
@@ -57,5 +60,16 @@ public class LoginActivity extends AppCompatActivity {
                 },
 
                 error -> Log.e(TAG, "signIn: failed" + error.toString()));
+    }
+    private void recordEvent(){
+        AnalyticsEvent event = AnalyticsEvent.builder()
+                .name("Launch Login Activity")
+                .addProperty("Channel", "SMS")
+                .addProperty("Successful", true)
+                .addProperty("ProcessDuration", 792)
+                .addProperty("UserAge", 120.3)
+                .build();
+
+        Amplify.Analytics.recordEvent(event);
     }
 }

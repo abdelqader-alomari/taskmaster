@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.amplifyframework.analytics.AnalyticsEvent;
 import com.amplifyframework.core.Amplify;
 
 public class ConfirmActivity extends AppCompatActivity {
@@ -21,6 +22,7 @@ public class ConfirmActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm);
+        recordEvent();
 
         EditText editText = findViewById(R.id.confirmCode);
         Button confirm = findViewById(R.id.confirm);
@@ -58,5 +60,16 @@ public class ConfirmActivity extends AppCompatActivity {
                     Log.i(TAG, "signIn: worked " + success.toString());
                 },
                 error -> Log.e(TAG, "signIn: failed" + error.toString()));
+    }
+    private void recordEvent(){
+        AnalyticsEvent event = AnalyticsEvent.builder()
+                .name("Launch Confirm activity")
+                .addProperty("Channel", "SMS")
+                .addProperty("Successful", true)
+                .addProperty("ProcessDuration", 792)
+                .addProperty("UserAge", 120.3)
+                .build();
+
+        Amplify.Analytics.recordEvent(event);
     }
 }

@@ -1,6 +1,6 @@
 # Task Master
 
-## Log v1.9 16/11/2021
+## Log v2.0 17/11/2021
 
 Task master is an android app with is help people to manage their daily tasks
 
@@ -197,3 +197,12 @@ When a new task is created within a team, alert all users who are a part of that
 - Image 3:
   - ![](screenshots/screens/)
 
+## Lab 39
+
+Add Analytics to amplify project. Create and send an Event whenever launch intents that start new activities.
+
+### Screenshots
+
+- ![Analytics 1 (30 days)](screenshots/screens/analytics1.PNG)
+- ![Analytics 2 (30 days)](screenshots/screens/analytics2.PNG)
+- ![Analytics 3 (today)](screenshots/screens/analytics3.PNG)
