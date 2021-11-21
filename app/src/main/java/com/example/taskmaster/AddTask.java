@@ -11,9 +11,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.FileUtils;
 import android.util.Log;
+import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 
 import androidx.activity.result.ActivityResult;
@@ -37,7 +39,8 @@ import java.util.Date;
 
 public class AddTask extends AppCompatActivity {
 
-    String img="";
+    String img = "";
+
     private static final String TAG = "AddTask";
     private String uploadedFileNames;
     ActivityResultLauncher<Intent> someActivityResultLauncher;
@@ -48,6 +51,7 @@ public class AddTask extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
         recordEvent();
+        shareImage();
 
         ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -96,18 +100,18 @@ public class AddTask extends AppCompatActivity {
 
             System.out.println(" Task Title: " + title);
             System.out.println(" Task Body: " + body);
-            System.out.println(" Task State: " + state);
+            System.out.println(" success State: " + state);
 
             Intent intent = new Intent(AddTask.this, MainActivity.class);
             startActivity(intent);
         });
     }
-    private void dataStore(String title, String body, String state, String id)
-    {
-        String fileNameIfThere = uploadedFileNames == null ? "" : uploadedFileNames;
-        Task task = Task.builder().teamId(id).title(title).body(body).state(state).imgUrl(fileNameIfThere).build();
 
-        Amplify.API.mutate(ModelMutation.create(task), succuess -> {
+    private void dataStore(String title, String body, String state, String id) {
+        String fileNameIfThere = uploadedFileNames == null ? "" : uploadedFileNames;
+        Task task = Task.builder().teamId(id).title(title).body(body).state(state).imgUrl(img).build();
+
+        Amplify.API.mutate(ModelMutation.create(task), success -> {
             Log.i(TAG, "Saved to DYNAMODB");
         }, error -> {
             Log.i(TAG, "error saving to DYNAMODB");
@@ -136,11 +140,15 @@ public class AddTask extends AppCompatActivity {
         Amplify.Storage.uploadFile(
                 uploadedFileName,
                 uploadFile,
-                success -> Log.i("onChooseFile", "uploadFileToS3: succeeded " + success.getKey()),
+                success -> {
+                    Log.i("onChooseFile", "uploadFileToS3: succeeded " + success.getKey());
+                    img = success.getKey();
+                },
                 error -> Log.e("onChooseFile", "uploadFileToS3: failed " + error.toString())
         );
-        uploadedFileNames= uploadedFileName;
+        uploadedFileNames = uploadedFileName;
     }
+
     public static String getMimeType(Context context, Uri uri) {
         String extension;
 
@@ -155,14 +163,16 @@ public class AddTask extends AppCompatActivity {
         return extension;
     }
 
-    private boolean permissionGranted(){
+    private boolean permissionGranted() {
         return ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
                 && ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
     }
-    private void requestPermission(){
+
+    private void requestPermission() {
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
     }
-    private void recordEvent(){
+
+    private void recordEvent() {
         AnalyticsEvent event = AnalyticsEvent.builder()
                 .name("Launch AddTask activity")
                 .addProperty("Channel", "SMS")
@@ -172,5 +182,22 @@ public class AddTask extends AppCompatActivity {
                 .build();
 
         Amplify.Analytics.recordEvent(event);
+    }
+
+    public void shareImage() {
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        String type = intent.getType();
+        ImageView image = findViewById(R.id.imageView);
+        if (Intent.ACTION_SEND.equals(action) && type != null) {
+            if (type.startsWith("image/")) {
+                Uri imageUri = (Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM);
+                if (imageUri != null) {
+                    image.setImageURI(imageUri);
+                    image.setVisibility(View.VISIBLE);
+                }
+            }
+        }
+
     }
 }

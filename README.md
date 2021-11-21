@@ -1,6 +1,6 @@
 # Task Master
 
-## Log v2.0 17/11/2021
+## Log v2.1 21/11/2021
 
 Task master is an android app with is help people to manage their daily tasks
 
@@ -206,3 +206,13 @@ Add Analytics to amplify project. Create and send an Event whenever launch inten
 - ![Analytics 1 (30 days)](screenshots/screens/analytics1.PNG)
 - ![Analytics 2 (30 days)](screenshots/screens/analytics2.PNG)
 - ![Analytics 3 (today)](screenshots/screens/analytics3.PNG)
+
+## Lab 41
+
+Add an intent filter to application such that a user can hit the “share” button on an image in another application, choose TaskMaster as the app to share that image with, and be taken directly to the Add a Task activity with that image pre-selected.
+
+### Screenshots
+
+- ![Choose Image to Share](screenshots/screens/chooseImgToShare.PNG)
+- ![Display Share Option to Add Task Activity in TaskMaster](screenshots/screens/DisplayShareOptionTaskMaster.PNG)
+- ![After Share button clicked, image exported to AddTask Activity through TaskMaster App](screenshots/screens/ImageInAddTaskAfterShare.PNG)
