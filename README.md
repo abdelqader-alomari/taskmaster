@@ -1,6 +1,6 @@
 # Task Master
 
-## Log v2.1 21/11/2021
+## Log v2.2 22/11/2021
 
 Task master is an android app with is help people to manage their daily tasks
 
@@ -216,3 +216,13 @@ Add an intent filter to application such that a user can hit the “share” but
 - ![Choose Image to Share](screenshots/screens/chooseImgToShare.PNG)
 - ![Display Share Option to Add Task Activity in TaskMaster](screenshots/screens/DisplayShareOptionTaskMaster.PNG)
 - ![After Share button clicked, image exported to AddTask Activity through TaskMaster App](screenshots/screens/ImageInAddTaskAfterShare.PNG)
+
+
+### Lab 42
+
+Add the user’s location to a task automatically when that task is created.
+Also Save the location as latitude and longitude
+
+![Location](screenshots/screens/Location.PNG)
+
+![Lat,Lon dynamoDB](screenshots/screens/LocationAWS.PNG)
