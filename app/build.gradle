@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'com.google.gms.google-services'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
 android {
@@ -32,12 +33,16 @@ android {
 }
 
 dependencies {
+    implementation 'com.google.android.gms:play-services-location:18.0.0'
+    implementation 'com.google.android.gms:play-services-maps:18.0.0'
+
 //    // Import the Firebase BoM
     implementation platform('com.google.firebase:firebase-bom:29.0.0')
 //
 //
 //    // Add the dependency for the Firebase SDK for Google Analytics
 //    // When using the BoM, don't specify versions in Firebase dependencies
+    implementation 'com.google.firebase:firebase-messaging'
     implementation 'com.google.firebase:firebase-analytics'
 //
 //

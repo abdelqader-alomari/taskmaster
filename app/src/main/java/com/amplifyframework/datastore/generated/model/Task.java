@@ -26,12 +26,16 @@ public final class Task implements Model {
   public static final QueryField BODY = field("body");
   public static final QueryField STATE = field("state");
   public static final QueryField IMG_URL = field("imgUrl");
+  public static final QueryField LATITUDE = field("latitude");
+  public static final QueryField LONGITUDE = field("Longitude");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="ID", isRequired = true) String teamID;
   private final @ModelField(targetType="String", isRequired = true) String title;
   private final @ModelField(targetType="String") String body;
   private final @ModelField(targetType="String") String state;
   private final @ModelField(targetType="String") String imgUrl;
+  private final @ModelField(targetType="Float") Double latitude;
+  private final @ModelField(targetType="Float") Double Longitude;
   public String getId() {
       return id;
   }
@@ -56,13 +60,23 @@ public final class Task implements Model {
       return imgUrl;
   }
   
-  private Task(String id, String teamID, String title, String body, String state, String imgUrl) {
+  public Double getLatitude() {
+      return latitude;
+  }
+  
+  public Double getLongitude() {
+      return Longitude;
+  }
+  
+  private Task(String id, String teamID, String title, String body, String state, String imgUrl, Double latitude, Double Longitude) {
     this.id = id;
     this.teamID = teamID;
     this.title = title;
     this.body = body;
     this.state = state;
     this.imgUrl = imgUrl;
+    this.latitude = latitude;
+    this.Longitude = Longitude;
   }
   
   @Override
@@ -78,7 +92,9 @@ public final class Task implements Model {
               ObjectsCompat.equals(getTitle(), task.getTitle()) &&
               ObjectsCompat.equals(getBody(), task.getBody()) &&
               ObjectsCompat.equals(getState(), task.getState()) &&
-              ObjectsCompat.equals(getImgUrl(), task.getImgUrl());
+              ObjectsCompat.equals(getImgUrl(), task.getImgUrl()) &&
+              ObjectsCompat.equals(getLatitude(), task.getLatitude()) &&
+              ObjectsCompat.equals(getLongitude(), task.getLongitude());
       }
   }
   
@@ -91,6 +107,8 @@ public final class Task implements Model {
       .append(getBody())
       .append(getState())
       .append(getImgUrl())
+      .append(getLatitude())
+      .append(getLongitude())
       .toString()
       .hashCode();
   }
@@ -104,7 +122,9 @@ public final class Task implements Model {
       .append("title=" + String.valueOf(getTitle()) + ", ")
       .append("body=" + String.valueOf(getBody()) + ", ")
       .append("state=" + String.valueOf(getState()) + ", ")
-      .append("imgUrl=" + String.valueOf(getImgUrl()))
+      .append("imgUrl=" + String.valueOf(getImgUrl()) + ", ")
+      .append("latitude=" + String.valueOf(getLatitude()) + ", ")
+      .append("Longitude=" + String.valueOf(getLongitude()))
       .append("}")
       .toString();
   }
@@ -138,6 +158,8 @@ public final class Task implements Model {
       null,
       null,
       null,
+      null,
+      null,
       null
     );
   }
@@ -148,7 +170,9 @@ public final class Task implements Model {
       title,
       body,
       state,
-      imgUrl);
+      imgUrl,
+      latitude,
+      Longitude);
   }
   public interface TeamIdStep {
     TitleStep teamId(String teamId);
@@ -166,6 +190,8 @@ public final class Task implements Model {
     BuildStep body(String body);
     BuildStep state(String state);
     BuildStep imgUrl(String imgUrl);
+    BuildStep latitude(Double latitude);
+    BuildStep longitude(Double longitude);
   }
   
 
@@ -176,6 +202,8 @@ public final class Task implements Model {
     private String body;
     private String state;
     private String imgUrl;
+    private Double latitude;
+    private Double Longitude;
     @Override
      public Task build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -186,7 +214,9 @@ public final class Task implements Model {
           title,
           body,
           state,
-          imgUrl);
+          imgUrl,
+          latitude,
+          Longitude);
     }
     
     @Override
@@ -221,6 +251,18 @@ public final class Task implements Model {
         return this;
     }
     
+    @Override
+     public BuildStep latitude(Double latitude) {
+        this.latitude = latitude;
+        return this;
+    }
+    
+    @Override
+     public BuildStep longitude(Double longitude) {
+        this.Longitude = longitude;
+        return this;
+    }
+    
     /** 
      * WARNING: Do not set ID when creating a new object. Leave this blank and one will be auto generated for you.
      * This should only be set when referring to an already existing object.
@@ -244,13 +286,15 @@ public final class Task implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String teamId, String title, String body, String state, String imgUrl) {
+    private CopyOfBuilder(String id, String teamId, String title, String body, String state, String imgUrl, Double latitude, Double longitude) {
       super.id(id);
       super.teamId(teamId)
         .title(title)
         .body(body)
         .state(state)
-        .imgUrl(imgUrl);
+        .imgUrl(imgUrl)
+        .latitude(latitude)
+        .longitude(longitude);
     }
     
     @Override
@@ -276,6 +320,16 @@ public final class Task implements Model {
     @Override
      public CopyOfBuilder imgUrl(String imgUrl) {
       return (CopyOfBuilder) super.imgUrl(imgUrl);
+    }
+    
+    @Override
+     public CopyOfBuilder latitude(Double latitude) {
+      return (CopyOfBuilder) super.latitude(latitude);
+    }
+    
+    @Override
+     public CopyOfBuilder longitude(Double longitude) {
+      return (CopyOfBuilder) super.longitude(longitude);
     }
   }
   
