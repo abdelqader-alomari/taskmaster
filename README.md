@@ -244,4 +244,4 @@ I make texts in xml files to be a variables stores in strings.xml files, so can 
 
 This is how first screen looks like:
 
-![First Screen](screenshots/screens/firstPage.PNG)
+![First Screen](https://user-images.githubusercontent.com/84499258/143317303-a19e423c-2054-4d55-89fc-6c25112a6a23.png)
