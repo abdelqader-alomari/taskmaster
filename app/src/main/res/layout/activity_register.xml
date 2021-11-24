@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FAE7E7"
+    android:background="@color/primary"
     android:orientation="vertical"
     tools:context=".LoginActivity">
 
@@ -15,7 +15,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="144dp"
         android:gravity="center"
-        android:text="Create New Account"
+        android:text="@string/create_new_account"
         android:textSize="30sp" />
 
     <EditText
@@ -26,7 +26,7 @@
         android:layout_marginTop="30dp"
         android:ems="10"
         android:gravity="center"
-        android:hint="Username"
+        android:hint="@string/username"
         android:inputType="textPersonName" />
 
     <EditText
@@ -37,7 +37,7 @@
         android:layout_marginTop="5dp"
         android:ems="10"
         android:gravity="center"
-        android:hint="Email"
+        android:hint="@string/email"
         android:inputType="textEmailAddress" />
 
     <EditText
@@ -48,9 +48,8 @@
         android:layout_marginTop="5dp"
         android:ems="10"
         android:gravity="center"
-        android:hint="Password"
+        android:hint="@string/password"
         android:inputType="textPassword" />
-
 
     <Button
         android:id="@+id/register"
@@ -58,15 +57,17 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
+        android:backgroundTint="@color/accent"
         android:text="Register" />
+
 
     <TextView
         android:id="@+id/signin"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="100dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Have already an account? "
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:text="@string/have_already_an_account"
         android:textColor="@color/black"
         android:textSize="18sp" />
 

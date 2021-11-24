@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FAE7E7"
+    android:background="@color/primary"
     android:orientation="vertical"
     tools:context=".LoginActivity">
 
@@ -15,7 +15,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="144dp"
         android:gravity="center"
-        android:text="Confirm Your Email"
+        android:text="@string/confirm_your_email"
         android:textSize="28sp" />
 
     <EditText
@@ -26,7 +26,7 @@
         android:layout_marginTop="30dp"
         android:ems="10"
         android:gravity="center"
-        android:hint="Confirmation Code"
+        android:hint="@string/confirmation_code"
         android:inputType="number" />
 
 
@@ -36,6 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:text="Confirm" />
+        android:backgroundTint="@color/accent"
+        android:text="@string/confirm" />
 
 </LinearLayout>

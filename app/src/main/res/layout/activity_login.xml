@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FAE7E7"
+    android:background="@color/primary"
     android:orientation="vertical"
     tools:context=".LoginActivity">
 
@@ -58,6 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
+        android:backgroundTint="@color/accent"
         android:text="Login" />
 
     <Button
@@ -66,8 +67,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/accent"
         android:text="signup"
-        android:textColor="#FF9800" />
+        android:textColor="@color/white" />
 
 </LinearLayout>

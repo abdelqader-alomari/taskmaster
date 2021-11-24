@@ -226,3 +226,22 @@ Also Save the location as latitude and longitude
 ![Location](screenshots/screens/Location.PNG)
 
 ![Lat,Lon dynamoDB](screenshots/screens/LocationAWS.PNG)
+
+### Lab 43
+
+add analytics to your application that allow tracking user sessions within application.
+
+### Screenshots
+
+- ![Analytics 1 (30 days)](screenshots/screens/analytics1.PNG)
+- ![Analytics 2 (30 days)](screenshots/screens/analytics2.PNG)
+- ![Analytics 3 (today)](screenshots/screens/analytics3.PNG)
+
+### Lab 44
+
+Polish Lab: I made some changes: I added a new color palette to my app, and edit little things
+I make texts in xml files to be a variables stores in strings.xml files, so can be reused or translated to other languages later
+
+This is how first screen looks like:
+
+![First Screen](screenshots/screens/firstPage.PNG)
